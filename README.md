@@ -1,5 +1,5 @@
 # USGS_Stream_Guage
-Function that creates .xlsx file of daily streamflow data between any dates for and USGS Stream Gauge.
+Function that creates .xlsx file of daily streamflow data between any dates for any USGS Stream Gauge.
 
 Copy and paste the Rcode script and run in the console. After running, the last line is an example of how to use the function. 
 
