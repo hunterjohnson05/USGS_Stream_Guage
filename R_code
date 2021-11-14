@@ -1,0 +1,37 @@
+library(dataRetrieval)
+library(writexl)
+library(ggplot2)
+
+USGS_Stream_Gauge_Retrieval <- function(start_date, end_date, site_number, path_name) {
+  #All of the function inputs must be entered as strings into the function
+  #start_date = Date to start data retrieval in the form of YYYY-MM-DD
+  #end_date =  Date to end data retrieval in the form of YYYY-MM-DD
+  #site_number = Site number of USGS gauge station of interest
+  #path_name = Global path name of where output .xlsx spreadsheet will be saved
+ 
+  #Necessary to creat message that specifies error for function inputs?
+  
+  river_info <- readNWISsite(site_number)
+  parameterCd <- "00060"
+  rawDailyData <- readNWISdv(site_number,parameterCd,
+                      start_date,end_date)
+  write_xlsx(rawDailyData,path_name)
+  
+  #Display a hydrograph of data
+  print(ggplot(rawDailyData, aes(x=Date, y=log10(X_00060_00003)))+geom_point()+geom_smooth()+labs(title=paste("Hydrograph from",start_date, "to", end_date), x="Dates", y="Log10 of Discharge (ft3/s)")+theme(plot.title = element_text(hjust = 0.5)))
+  print(paste("The amount of days in the dataset are", nrow(rawDailyData)))
+  
+#Count how many no-flow days were recorded
+  table_count <- table(rawDailyData[4])
+  zero_count <- table_count[names(table_count)==0]
+
+  #How to get this ifelse statement to work?
+  if (length(zero_count)==0) {
+    print("The amount of days with no-flow is zero")
+  } else {
+    print(paste("The amount of days with no-flow is",zero_count))
+  }
+  
+}
+
+# USGS_Stream_Gauge_Retrieval("1989-01-25", "2021-08-07", "11152500", "C:\\Directory\\GaugeStationName_daily.xlsx")
