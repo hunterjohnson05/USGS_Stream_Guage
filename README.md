@@ -1,8 +1,9 @@
 # USGS_Stream_Guage
-Function that creates .xlsx file of daily streamflow data between any dates for any USGS Stream Gauge.
+Summary: Function that creates .xlsx file of daily streamflow data between any dates for any USGS Stream Gauge.
 
-Copy and paste the Rcode script and run in the console. After running, the last line is an example of how to use the function. 
+How to use: Copy and paste the "R_code" script and run in Rstudio. After running, execute the function "USGS_Stream_Gauge_Retrieval". 
 
-4 inputs are required: the USGS Gauge Station code, start date, end date, and file path of where the .xslx will be saved. 
+Inputs: USGS Gauge Station code, start date, end date, and file path of where the .xslx will be saved. 
+Example: USGS_Stream_Gauge_Retrieval("1989-01-25", "2021-08-07", "11152500", "T:\\Hunter_Johnson\\Data\\Spreckles_daily.xlsx")
 
-After exectugin the function, a .xslx of the daily data will be created in the specified location along with a hydrograph of all the data in the R console.
+Outputs: .xslx of the daily data stored in the specified location, and a hydrograph of all the data in the R console.
